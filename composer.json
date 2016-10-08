@@ -1,0 +1,15 @@
+{
+    "name": "nkleekamp/wordpress-rabbitmq",
+    "type": "wordpress-plugin",
+    "description" : "A plugin for emitting messages for create, update, and delete events in Wordpress.",
+    "authors": [
+        {
+            "name": "Nathan Kleekamp",
+            "email": "nkleekamp@gmail.com"
+        }
+    ],
+    "require": {
+       "composer/installers": "~1.0",
+       "php-amqplib/php-amqplib": "2.6.*"
+    }
+}
