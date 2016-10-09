@@ -1,32 +1,76 @@
 (function( $ ) {
-	'use strict';
+  'use strict';
 
-	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
+  $(document).ready(function() {
+    var form = document.getElementById('wordpress-rabbitmq-settings');
+
+    if (!form) {
+      return;
+    }
+
+    var ssl = form.querySelector('#rabbitmq_server_ssl');
+    var sslTrue = form.querySelector('#rabbitmq_server_ssl_true');
+    var sslFalse = form.querySelector('#rabbitmq_server_ssl_false');
+    var sslSettings = form.querySelector('#wordpress-rabbitmq-ssl-settings');
+
+    function getChecked() {
+      return form.querySelector('input[type="radio"]:checked');
+    }
+
+    function show() {
+      var classList = sslSettings.classList;
+
+      if (classList.contains('hidden') === true) {
+        classList.remove('hidden');
+        return;
+      }
+    }
+
+    function hide() {
+      var classList = sslSettings.classList;
+
+      if (classList.contains('hidden') === false) {
+        classList.add('hidden');
+        return;
+      }
+    }
+
+    function resetFields(fields) {
+      fields = Array.prototype.slice.call(fields);
+
+      fields.forEach(function(field) {
+        if (field.type !== 'radio') {
+          field.value = "";
+          return;
+        }
+
+        field.value = false;
+      });
+    }
+
+    ssl.addEventListener("click", function(e) {
+      if (e.error) {
+        console.error(e.error);
+      }
+
+      var checked = getChecked();
+
+      if (checked === sslTrue) {
+        show();
+        return;
+      }
+
+      if (checked === sslFalse) {
+        //var fields = sslSettings.querySelectorAll('input');
+
+        hide();
+        //resetFields(fields);
+      }
+    });
+
+    if (sslTrue.checked === true) {
+      show();
+    }
+  });
 
 })( jQuery );

@@ -1,4 +1,17 @@
-/**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
+.wordpress-rabbitmq-textfield {
+  padding: 0.35em;
+  width: 50%;
+}
+
+.wordpress-rabbitmq-hidden {
+  display: none;
+}
+
+.form-table td fieldset.wordpress-rabbitmq-radio-fieldset input {
+  position: relative;
+  top: 2px;
+}
+
+.form-table td fieldset.wordpress-rabbitmq-radio-fieldset label {
+  margin: 0 1em 0 0 !important;
+}
