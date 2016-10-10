@@ -66,7 +66,7 @@ $options = get_option('wordpress_rabbitmq_options');
               <br><code>define('WP_RABBITMQ_CERT_FILE', '/path/to/file/.pem');</code>
               <br><code>define('WP_RABBITMQ_SA_FILE', '/path/to/file/.pem');</code>
             </p>
-            <label for="wordpress_rabbitmq_options[verify_peer]"><?php echo __( 'Reject Unauthorized' ) ?>
+            <label for="wordpress_rabbitmq_options[verify_peer]"><?php echo __( 'Verify Peer' ) ?>
               <div class="radio-wrapper">
                 <label for="rabbitmq_server_verify_peer_true" class="inline"><?php echo __( 'True' ) ?>
                 <input type="radio" name="wordpress_rabbitmq_options[verify_peer]" id="rabbitmq_server_verify_peer_true" autocomplete="off" value="true" <?php echo isset( $options['verify_peer'] ) && $options['verify_peer'] === 'true' ? esc_attr ('checked=checked' ) : "" ?> >
