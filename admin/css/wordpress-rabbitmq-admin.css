@@ -3,15 +3,44 @@
   width: 50%;
 }
 
-.wordpress-rabbitmq-hidden {
-  display: none;
+.wordpress-rabbitmq-fieldset {
+  margin-bottom: 1em;
 }
 
-.form-table td fieldset.wordpress-rabbitmq-radio-fieldset input {
+.wordpress-rabbitmq-fieldset label,
+.wordpress-rabbitmq-fieldset input[type="text"],
+.wordpress-rabbitmq-fieldset input[type="password"],
+.wordpress-rabbitmq-fieldset input[type="number"] {
+  display: block;
+}
+
+.wordpress-rabbitmq-fieldset label {
+  margin-bottom: 1em;
+}
+
+.wordpress-rabbitmq-fieldset label.inline {
+  display: inline;
+}
+
+.wordpress-rabbitmq-fieldset input {
+  margin-top: 0.25em;
+}
+
+.wordpress-rabbitmq-radio-fieldset input[type="radio"] {
   position: relative;
-  top: 2px;
+  bottom: 2px;
 }
 
-.form-table td fieldset.wordpress-rabbitmq-radio-fieldset label {
-  margin: 0 1em 0 0 !important;
+.wordpress-rabbitmq-radio-fieldset label {
+  margin-right: 1em;
+}
+
+.wordpress-rabbitmq-radio-fieldset .radio-wrapper {
+  margin-bottom: 1em;
+}
+
+.wordpress-rabbitmq-form .submit {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
 }
