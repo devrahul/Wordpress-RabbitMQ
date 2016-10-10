@@ -14,8 +14,8 @@ define it in your `wp-config.php`:
 define('WP_RABBITMQ_PASSWORD', 'password');
 ```
 
-Other settings to be included in the `wp-config.php` file are for
-connecting to the RabbitMQ server via SSL.
+To connect to a RabbitMQ server via SSL, you'll also have to add these constants to your
+`wp-config.php`:
 
 ```php
 define('WP_RABBITMQ_KEY_FILE', '/path/to/file/.pem');
