@@ -1,6 +1,14 @@
 .wordpress-rabbitmq-textfield {
-  padding: 0.35em;
+  font: 1em;
+  height: 35px !important;
+  padding: 0.5em;
   width: 50%;
+}
+
+@media only screen and (max-width: 960px) {
+  .wordpress-rabbitmq-textfield {
+    width: 100%;
+  }
 }
 
 .wordpress-rabbitmq-fieldset {
@@ -31,12 +39,13 @@
   bottom: 2px;
 }
 
-.wordpress-rabbitmq-radio-fieldset label {
-  margin-right: 1em;
-}
-
 .wordpress-rabbitmq-radio-fieldset .radio-wrapper {
   margin-bottom: 1em;
+}
+
+.wordpress-rabbitmq-ssl-settings {
+  background-color: rgb(228, 228, 228);
+  padding: 0.25em 1em;
 }
 
 .wordpress-rabbitmq-form .submit {
@@ -44,3 +53,4 @@
   margin: 0;
   padding: 0;
 }
+

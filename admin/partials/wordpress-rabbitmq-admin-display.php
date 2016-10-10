@@ -30,20 +30,18 @@ $options = get_option('wordpress_rabbitmq_options');
   <form action="?save-settings=true" method="post" id="wordpress-rabbitmq-settings" class="wordpress-rabbitmq-form">
     <fieldset class="wordpress-rabbitmq-fieldset">
       <h3>RabbitMQ Server Settings</h3>
+      <p>To connect to a RabbitMQ server with a password, you'll need to to define it in your <code>wp-config.php</code>:<br><code>define('WP_RABBITMQ_PASSWORD', 'password');</code></p>
       <label for="wordpress_rabbitmq_options[host]"><?php echo __( 'Host' ) ?>:
         <input type="text" name="wordpress_rabbitmq_options[host]" id="wordpress_rabbitmq_options[host]" autocomplete="off" placeholder="amqp://" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['host'] ) ? esc_attr( $options['host'] ) : "" ?>">
       </label>
       <label for="wordpress_rabbitmq_options[port]"><?php echo __( 'Port' ) ?>:
-        <input type="number" name="wordpress_rabbitmq_options[port]" id="wordpress_rabbitmq_options[port]" autocomplete="off" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['port'] ) ? esc_attr( $options['port'] ) : 5672 ?>">
+        <input type="number" min=0 name="wordpress_rabbitmq_options[port]" id="wordpress_rabbitmq_options[port]" autocomplete="off" placeholder="5672" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['port'] ) ? esc_attr( $options['port'] ) : 5672 ?>">
       </label>
       <label for="wordpress_rabbitmq_options[username]"><?php echo __( 'Username' ) ?>:
         <input type="text" name="wordpress_rabbitmq_options[username]" id="wordpress_rabbitmq_options[username]" autocomplete="off" placeholder="rabbitmq" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['username'] ) ? esc_attr( $options['username'] ) : "" ?>">
       </label>
-      <label for="wordpress_rabbitmq_options[password]"><?php echo __( 'Password' ) ?>:
-        <input type="password" name="wordpress_rabbitmq_options[password]" id="wordpress_rabbitmq_options[password]" autocomplete="off" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['password'] ) ? esc_attr( $options['password'] ) : "" ?>">
-      </label>
       <label for="wordpress_rabbitmq_options[connection_timeout]"><?php echo __( 'Connection Timeout' ) ?>:
-        <input type="number" name="wordpress_rabbitmq_options[connection_timeout]" id="wordpress_rabbitmq_options[connection_timeout]" autocomplete="off" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['connection_timeout'] ) ? esc_attr( $options['connection_timeout'] ) : 10000 ?>">
+        <input type="number" min=0 name="wordpress_rabbitmq_options[connection_timeout]" id="wordpress_rabbitmq_options[connection_timeout]" autocomplete="off" placeholder="10000" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['connection_timeout'] ) ? esc_attr( $options['connection_timeout'] ) : 10000 ?>">
       </label>
       <label for="wordpress_rabbitmq_options[auth_type]"><?php echo __( 'Authentication Type' ) ?>:
         <input type="text" name="wordpress_rabbitmq_options[auth_type]" id="wordpress_rabbitmq_options[auth_type]" autocomplete="off" placeholder="AMQPLAIN" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['auth_type'] ) ? esc_attr( $options['auth_type'] ) : "" ?>">
@@ -61,17 +59,13 @@ $options = get_option('wordpress_rabbitmq_options');
               <input type="radio" name="wordpress_rabbitmq_options[ssl]" id="rabbitmq_server_ssl_false" autocomplete="off" value="false" <?php echo isset( $options['ssl'] ) && $options['ssl'] === 'false' ? esc_attr( 'checked=checked' ) : "" ?> >
             </label>
           </div>
-          <div id="wordpress-rabbitmq-ssl-settings">
+          <div id="wordpress-rabbitmq-ssl-settings" class="wordpress-rabbitmq-ssl-settings">
             <h4>SSL Settings</h4>
-            <label for="wordpress_rabbitmq_options[key_file]"><?php echo __( 'Key File' ) ?>:
-              <input type="text" name="wordpress_rabbitmq_options[key_file]" id="wordpress_rabbitmq_options[key_file]" autocomplete="off" placeholder="/path/to/file" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['key_file'] ) ? esc_attr( $options['key_file'] ) : "" ?>">
-            </label>
-            <label for="wordpress_rabbitmq_options[ssl_cert]"><?php echo __( 'SSL Certificate' ) ?>:
-              <input type="text" name="wordpress_rabbitmq_options[ssl_cert]" id="wordpress_rabbitmq_options[ssl_cert]" autocomplete="off" placeholder="/path/to/file" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['ssl_cert'] ) ? esc_attr( $options['ssl_cert'] ) : "" ?>">
-            </label>
-            <label for="wordpress_rabbitmq_options[sa_file]"><?php echo __( 'Certificate Authority' ) ?>:
-              <input type="text" name="wordpress_rabbitmq_options[sa_file]" id="wordpress_rabbitmq_options[sa_file]" autocomplete="off" placeholder="/path/to/file" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['sa_file'] ) ? esc_attr( $options['sa_file'] ) : "" ?>">
-            </label>
+            <p>To connect to a RabbitMQ server via SSL, you'll need to define the following in your <code>wp-config.php</code>:
+              <br><code>define('WP_RABBITMQ_KEY_FILE', '/path/to/file/.pem');</code>
+              <br><code>define('WP_RABBITMQ_CERT_FILE', '/path/to/file/.pem');</code>
+              <br><code>define('WP_RABBITMQ_SA_FILE', '/path/to/file/.pem');</code>
+            </p>
             <label for="wordpress_rabbitmq_options[verify_peer]"><?php echo __( 'Reject Unauthorized' ) ?>
               <div class="radio-wrapper">
                 <label for="rabbitmq_server_verify_peer_true" class="inline"><?php echo __( 'True' ) ?>

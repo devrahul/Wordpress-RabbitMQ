@@ -78,6 +78,14 @@ class Wordpress_Rabbitmq_Admin {
   }
 
 
+  /**
+   * Custom form processing for the plugin's admin page.
+   *
+   * @see https://git.io/vP0dA
+   *
+   * @since 1.0.0
+   */
+
   public function process_form() {
     if ( ! isset( $_GET['save-settings'] ) || $_GET['save-settings'] !== 'true' ) {
       return;
@@ -92,17 +100,64 @@ class Wordpress_Rabbitmq_Admin {
     }
 
     $updated = isset( $_POST['wordpress_rabbitmq_options'] ) ? $_POST['wordpress_rabbitmq_options'] : array();
+    $sanitized = array();
 
     if ( ! $updated ) {
       return;
     }
 
-    // @todo Sanitize data and don't store password as plain text in before storing in the db
+    if ( isset( $updated['host'] ) ) {
+      $sanitized['host'] = sanitize_text_field( $updated['host'] );
+    }
 
-    update_option( 'wordpress_rabbitmq_options', $updated );
+    if ( isset( $updated['port'] ) ) {
+      $sanitized['port'] = intval( $updated['port'] );
+    }
+
+    if ( isset( $updated['username'] ) ) {
+      $sanitized['username'] = sanitize_text_field( $updated['username'] );
+    }
+
+    if ( isset( $updated['connection_timeout'] ) ) {
+      $sanitized['connection_timeout'] = intval( $updated['connection_timeout'] );
+    }
+
+    if ( isset( $updated['auth_type'] ) ) {
+      $sanitized['auth_type'] = sanitize_text_field( $updated['auth_type'] );
+    }
+
+    if ( isset( $updated['vhost'] ) ) {
+      $sanitized['vhost'] = sanitize_text_field( $updated['vhost'] );
+    }
+
+    if ( isset( $updated['ssl'] ) ) {
+      $sanitized['ssl'] = $this->validate_bool( $updated['ssl'] );
+    }
+
+    if ( isset( $updated['verify_peer'] ) ) {
+      $sanitized['verify_peer'] = $this->validate_bool( $updated['verify_peer'] );
+    }
+
+    update_option( 'wordpress_rabbitmq_options', $sanitized );
 
     wp_redirect( add_query_arg( array( 'page' => 'wordpress-rabbitmq', 'settings-updated' => 'success' ), admin_url( 'admin.php' ) ) );
-    exit;
+  }
+
+
+  /**
+   * Validate the radio button only returns true or false
+   *
+   * @param   string    $input    The data from the radio button field
+   *
+   * Since 1.0.0
+   */
+
+  public function validate_bool( $input ) {
+    if ( $input === "true" || $input === "false" ) {
+      return $input;
+    }
+
+    return;
   }
 
 
