@@ -36,6 +36,7 @@
     button.checked = false;
   }
 
+  // @todo: Better reset that restores default values
   function reset(fields) {
     fields.forEach(function(field) {
       if (field.type !== 'radio') {
