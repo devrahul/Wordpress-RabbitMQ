@@ -100,47 +100,63 @@ class Wordpress_Rabbitmq_Admin {
     }
 
     $updated = isset( $_POST['wordpress_rabbitmq_options'] ) ? $_POST['wordpress_rabbitmq_options'] : array();
-    $sanitized = array();
 
     if ( ! $updated ) {
       return;
     }
 
-    if ( isset( $updated['host'] ) ) {
-      $sanitized['host'] = sanitize_text_field( $updated['host'] );
-    }
-
-    if ( isset( $updated['port'] ) ) {
-      $sanitized['port'] = intval( $updated['port'] );
-    }
-
-    if ( isset( $updated['username'] ) ) {
-      $sanitized['username'] = sanitize_text_field( $updated['username'] );
-    }
-
-    if ( isset( $updated['connection_timeout'] ) ) {
-      $sanitized['connection_timeout'] = intval( $updated['connection_timeout'] );
-    }
-
-    if ( isset( $updated['auth_type'] ) ) {
-      $sanitized['auth_type'] = sanitize_text_field( $updated['auth_type'] );
-    }
-
-    if ( isset( $updated['vhost'] ) ) {
-      $sanitized['vhost'] = sanitize_text_field( $updated['vhost'] );
-    }
-
-    if ( isset( $updated['ssl'] ) ) {
-      $sanitized['ssl'] = $this->validate_bool( $updated['ssl'] );
-    }
-
-    if ( isset( $updated['verify_peer'] ) ) {
-      $sanitized['verify_peer'] = $this->validate_bool( $updated['verify_peer'] );
-    }
+    $sanitized = $this->sanitize($updated);
 
     update_option( 'wordpress_rabbitmq_options', $sanitized );
 
     wp_redirect( add_query_arg( array( 'page' => 'wordpress-rabbitmq', 'settings-updated' => 'success' ), admin_url( 'admin.php' ) ) );
+  }
+
+
+  /**
+   * Sanitize the Post data
+   *
+   * @param   Array   $data   The data to sanitize
+   *
+   * Since 1.0.0
+   */
+
+  private function sanitize( $data ) {
+    $sanitized = array();
+
+    if ( isset( $data['host'] ) ) {
+      $sanitized['host'] = sanitize_text_field( $data['host'] );
+    }
+
+    if ( isset( $data['port'] ) ) {
+      $sanitized['port'] = intval( $data['port'] );
+    }
+
+    if ( isset( $data['username'] ) ) {
+      $sanitized['username'] = sanitize_text_field( $data['username'] );
+    }
+
+    if ( isset( $data['connection_timeout'] ) ) {
+      $sanitized['connection_timeout'] = intval( $data['connection_timeout'] );
+    }
+
+    if ( isset( $data['auth_type'] ) ) {
+      $sanitized['auth_type'] = sanitize_text_field( $data['auth_type'] );
+    }
+
+    if ( isset( $data['vhost'] ) ) {
+      $sanitized['vhost'] = sanitize_text_field( $data['vhost'] );
+    }
+
+    if ( isset( $data['ssl'] ) ) {
+      $sanitized['ssl'] = $this->validate_bool( $data['ssl'] );
+    }
+
+    if ( isset( $data['verify_peer'] ) ) {
+      $sanitized['verify_peer'] = $this->validate_bool( $data['verify_peer'] );
+    }
+
+    return $sanitized;
   }
 
 
