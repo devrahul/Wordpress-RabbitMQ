@@ -33,10 +33,10 @@ class Wordpress_Rabbitmq {
    *
    * @since    1.0.0
    * @access   protected
-   * @var      string    $wordpress_rabbitmq    The string used to uniquely identify this plugin.
+   * @var      string    $plugin_name   The string used to uniquely identify this plugin.
    */
 
-  protected $wordpress_rabbitmq;
+  protected $plugin_name;
 
   /**
    * The current version of the plugin.
@@ -59,7 +59,7 @@ class Wordpress_Rabbitmq {
    */
 
   public function __construct() {
-    $this->wordpress_rabbitmq = 'wordpress-rabbitmq';
+    $this->plugin_name = 'wordpress-rabbitmq';
     $this->version = '1.0.0';
 
     $this->load_dependencies();
@@ -121,8 +121,10 @@ class Wordpress_Rabbitmq {
    */
 
   private function define_admin_hooks() {
-    $plugin_admin = new Wordpress_Rabbitmq_Admin( $this->get_wordpress_rabbitmq(), $this->get_version() );
+    $plugin_admin = new Wordpress_Rabbitmq_Admin( $this->get_plugin_name(), $this->get_version() );
 
+    $this->loader->add_action( 'admin_init', $plugin_admin, 'process_form' );
+    $this->loader->add_action( 'admin_menu', $plugin_admin, 'added_options_page' );
     $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
     $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
   }
@@ -136,7 +138,7 @@ class Wordpress_Rabbitmq {
    */
 
   private function define_public_hooks() {
-    $plugin_public = new Wordpress_Rabbitmq_Public( $this->get_wordpress_rabbitmq(), $this->get_version() );
+    $plugin_public = new Wordpress_Rabbitmq_Public( $this->get_plugin_name(), $this->get_version() );
 
     $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
     $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -152,6 +154,7 @@ class Wordpress_Rabbitmq {
     $this->loader->run();
   }
 
+
   /**
    * The name of the plugin used to uniquely identify it within the context of
    * WordPress and to define internationalization functionality.
@@ -160,8 +163,8 @@ class Wordpress_Rabbitmq {
    * @return    string    The name of the plugin.
    */
 
-  public function get_wordpress_rabbitmq() {
-    return $this->wordpress_rabbitmq;
+  public function get_plugin_name() {
+    return $this->plugin_name;
   }
 
   /**

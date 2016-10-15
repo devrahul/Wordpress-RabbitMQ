@@ -1,4 +1,56 @@
-/**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
+.wordpress-rabbitmq-textfield {
+  font: 1em;
+  height: 35px !important;
+  padding: 0.5em;
+  width: 50%;
+}
+
+@media only screen and (max-width: 960px) {
+  .wordpress-rabbitmq-textfield {
+    width: 100%;
+  }
+}
+
+.wordpress-rabbitmq-fieldset {
+  margin-bottom: 1em;
+}
+
+.wordpress-rabbitmq-fieldset label,
+.wordpress-rabbitmq-fieldset input[type="text"],
+.wordpress-rabbitmq-fieldset input[type="password"],
+.wordpress-rabbitmq-fieldset input[type="number"] {
+  display: block;
+}
+
+.wordpress-rabbitmq-fieldset label {
+  margin-bottom: 1em;
+}
+
+.wordpress-rabbitmq-fieldset label.inline {
+  display: inline;
+}
+
+.wordpress-rabbitmq-fieldset input {
+  margin-top: 0.25em;
+}
+
+.wordpress-rabbitmq-radio-fieldset input[type="radio"] {
+  position: relative;
+  bottom: 2px;
+}
+
+.wordpress-rabbitmq-radio-fieldset .radio-wrapper {
+  margin-bottom: 1em;
+}
+
+.wordpress-rabbitmq-ssl-settings {
+  background-color: rgb(228, 228, 228);
+  padding: 0.25em 1em;
+}
+
+.wordpress-rabbitmq-form .submit {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+

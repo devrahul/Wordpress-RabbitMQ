@@ -31,10 +31,10 @@ class Wordpress_Rabbitmq_Public {
    *
    * @since    1.0.0
    * @access   private
-   * @var      string    $wordpress_rabbitmq    The ID of this plugin.
+   * @var      string    $plugin_name The ID of this plugin.
    */
 
-  private $wordpress_rabbitmq;
+  private $plugin_name;
 
   /**
    * The version of this plugin.
@@ -50,12 +50,12 @@ class Wordpress_Rabbitmq_Public {
    * Initialize the class and set its properties.
    *
    * @since    1.0.0
-   * @param      string    $wordpress_rabbitmq       The name of the plugin.
+   * @param      string    $plugin_name   The name of the plugin.
    * @param      string    $version    The version of this plugin.
    */
 
-  public function __construct( $wordpress_rabbitmq, $version ) {
-    $this->wordpress_rabbitmq = $wordpress_rabbitmq;
+  public function __construct( $plugin_name , $version ) {
+    $this->plugin_name = $plugin_name;
     $this->version = $version;
   }
 
@@ -66,7 +66,7 @@ class Wordpress_Rabbitmq_Public {
    */
 
   public function enqueue_styles() {
-    wp_enqueue_style( $this->wordpress_rabbitmq, plugin_dir_url( __FILE__ ) . 'css/wordpress-rabbitmq-public.css', array(), $this->version, 'all' );
+    wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wordpress-rabbitmq-public.css', array(), $this->version, 'all' );
   }
 
   /**
@@ -76,6 +76,6 @@ class Wordpress_Rabbitmq_Public {
    */
 
   public function enqueue_scripts() {
-    wp_enqueue_script( $this->wordpress_rabbitmq, plugin_dir_url( __FILE__ ) . 'js/wordpress-rabbitmq-public.js', array( 'jquery' ), $this->version, false );
+    wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wordpress-rabbitmq-public.js', array( 'jquery' ), $this->version, false );
   }
 }
