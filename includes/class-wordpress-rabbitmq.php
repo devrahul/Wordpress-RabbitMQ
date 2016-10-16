@@ -149,7 +149,10 @@ class Wordpress_Rabbitmq {
   private function define_amqp_hooks() {
     $plugin_public = new Wordpress_Rabbitmq_AMQP( $this->get_plugin_name(), $this->get_version() );
 
-    $this->loader->add_action( 'admin_init', $plugin_public, 'test' );
+    $this->loader->add_action( 'create_term', $plugin_public, 'get_term', 10, 3 );
+    $this->loader->add_action( 'edited_term', $plugin_public, 'get_term', 10, 3 );
+    $this->loader->add_action( 'delete_term', $plugin_public, 'delete_term', 10, 3 );
+    $this->loader->add_action( 'transition_post_status', $plugin_public, 'status_change', 10, 3 );
   }
 
   /**
@@ -161,7 +164,6 @@ class Wordpress_Rabbitmq {
   public function run() {
     $this->loader->run();
   }
-
 
   /**
    * The name of the plugin used to uniquely identify it within the context of

@@ -32,7 +32,7 @@ $options = get_option('wordpress_rabbitmq_options');
       <h3>RabbitMQ Server Settings</h3>
       <p>To connect to a RabbitMQ server with a password, you'll need to to define it in your <code>wp-config.php</code>:<br><code>define('WP_RABBITMQ_PASSWORD', 'password');</code></p>
       <label for="wordpress_rabbitmq_options[host]"><?php echo __( 'Host' ) ?>:
-        <input type="text" name="wordpress_rabbitmq_options[host]" id="wordpress_rabbitmq_options[host]" autocomplete="off" placeholder="amqp://" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['host'] ) ? esc_attr( $options['host'] ) : "" ?>">
+        <input type="text" name="wordpress_rabbitmq_options[host]" id="wordpress_rabbitmq_options[host]" autocomplete="off" placeholder="127.0.0.1" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['host'] ) ? esc_attr( $options['host'] ) : "" ?>">
       </label>
       <label for="wordpress_rabbitmq_options[port]"><?php echo __( 'Port' ) ?>:
         <input type="number" min=0 name="wordpress_rabbitmq_options[port]" id="wordpress_rabbitmq_options[port]" autocomplete="off" placeholder="5672" class="wordpress-rabbitmq-textfield" value="<?php echo isset( $options['port'] ) ? esc_attr( $options['port'] ) : 5672 ?>">
